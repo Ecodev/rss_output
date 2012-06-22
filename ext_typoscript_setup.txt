@@ -55,7 +55,7 @@ page_9090 {
 	config{
 		disableAllHeaderCode = 1
 		disableCharsetHeader = 1
-		#additionalHeaders = Content-type:text/xml
+		additionalHeaders = Content-type:application/atom+xml
 		xhtml_cleaning = 0
 		admPanel = 0
 	}
