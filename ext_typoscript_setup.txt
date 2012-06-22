@@ -1,0 +1,101 @@
+
+###############################
+# GENERATE THE FEED tt_news
+###############################
+
+page_9090 = PAGE
+page_9090 {
+	typeNum = 9090
+#	10 = USER
+#	10 {
+#		userFunc = tx_rssoutput_pi1->main
+#		#lang = fr-FR
+#		#title = CHANGEME
+#		#subtitle = CHANGEME
+#		#pidRootline = {$ecocenter.pidRootline}
+#		#tidy = 1
+#		#numberItems = 10
+#		select {
+#			01 {
+#				table = tt_news
+#				title = title
+#				summary = short
+#				published = crdate
+#				updated = tstamp
+#				debug = 0
+#				baseUrl = {$userBaseUrl}
+#				additionalSQL = AND tt_news.uid IN (SELECT tt_news_cat_mm.uid_local FROM tt_news_cat_mm WHERE tt_news_cat_mm.uid_foreign = {$ecocenter.tt_news_cat})
+#				additionalPids = 27
+#
+#				single_page {
+##					pid = {$ecocenter.tt_news_single_pid}
+#					linkParamUid = tx_ttnews[tt_news]
+#				}
+#			}
+#		}
+#	}
+
+	10 = COA_INT
+	10 {
+		10 = USER_INT
+		10 {
+			userFunc = tx_extbase_core_bootstrap->run
+			extensionName = RssOutput
+			pluginName = Pi1
+
+			# LIMIT CONTROLLER / ACTION
+			switchableControllerActions {
+				Feed {
+					1 = index
+				}
+			}
+		}
+	}
+
+	config{
+		disableAllHeaderCode = 1
+		disableCharsetHeader = 1
+		#additionalHeaders = Content-type:text/xml
+		xhtml_cleaning = 0
+		admPanel = 0
+	}
+}
+
+###############################
+# GENERATE THE FEED tt_news
+###############################
+
+/*
+feed3 = PAGE
+feed3 {
+  typeNum = 103
+  10 >
+  10 = USER
+  10.userFunc = tx_rssoutput_pi1->main
+  10.title = title of the feed
+  10.subtitle = subtitle of the feed
+  10.lang = fr-FR
+  10.cache_period = 3600
+  10.numberItems = 10
+  10.feed = atom
+  10.select {
+	01 {
+	  table = tt_content
+	  title = header
+	  summary = bodytext
+	  published = tstamp
+	  updated = tstamp
+	  debug = 0
+	}
+  }
+  config {
+	disableAllHeaderCode = 1
+	disableCharsetHeader = 1
+	additionalHeaders = Content-type:text/xml
+	no_cache = 1
+	xhtml_cleaning = 0
+	admPanel = 0
+  }
+}
+
+*/

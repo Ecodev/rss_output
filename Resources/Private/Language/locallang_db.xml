@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'rss_output'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.tx_rssoutput_includeinfeed">Include content in RSS feed</label>
+			<label index="tt_content.list_type_pi1">RSS Feed</label>
+			<label index="tx_rssoutput_feed">RSS Feed</label>
+			<label index="tx_rssoutput_feed.title">Title</label>
+			<label index="tx_rssoutput_feed.description">Description</label>
+			<label index="tx_rssoutput_feed.number_of_items">Number of items</label>
+			<label index="tx_rssoutput_feed.configuration">Configuration</label>
+		</languageKey>
+		<languageKey index="fr" type="array">
+			<label index="tt_content.tx_rssoutput_includeinfeed">Inclure le contenu dans le flux RSS</label>
+			<label index="tt_content.list_type_pi1">Flux RSS</label>
+			<label index="tx_rssoutput_feed.title">Titre</label>
+			<label index="tx_rssoutput_feed.description">Description</label>
+			<label index="tx_rssoutput_feed.number_of_items">Nombre d'éléments</label>
+			<label index="tx_rssoutput_feed.configuration">Configuration</label>
+		</languageKey>
+	</data>
+</T3locallang>
