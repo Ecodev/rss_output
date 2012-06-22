@@ -70,14 +70,13 @@ class Tx_RssOutput_Domain_Repository_RecordRepository {
 		///////////////////////////////
 		// Select processing
 		///////////////////////////////
-		$fields = $config['field'];
-		$title = !empty($fields['title']) ? $fields['title'] : 'header';
-		$summary = !empty($fields['summary']) ? $fields['summary'] : 'bodytext';
-		$published = !empty($fields['published']) ? $fields['published'] : 'tstamp';
-		$updated = !empty($fields['updated']) ? $fields['updated'] : 'tstamp';
-		$uid = !empty($fields['uid']) ? $fields['uid'] : 'uid';
+		$title = !empty($config['title']) ? $config['title'] : 'header';
+		$summary = !empty($config['summary']) ? $config['summary'] : 'bodytext';
+		$published = !empty($config['published']) ? $config['published'] : 'tstamp';
+		$updated = !empty($config['updated']) ? $config['updated'] : 'tstamp';
+		$uid = !empty($config['uid']) ? $config['uid'] : 'uid';
 		$headerLayout = $config['table'] == 'tt_content' ? ', header_layout' : '';
-		$pid = !empty($fields['pid']) ? $fields['pid'] : 'pid';
+		$pid = !empty($config['pid']) ? $config['pid'] : 'pid';
 		$additionalFields = !empty($config['additionalFields']) ? ", " . $config['additionalFields'] : '';
 
 		$selectPart = $pid . ' as pid, ' . $uid . ' as uid, ' . $title . ' as title, ' . $summary . ' as summary, '
@@ -136,6 +135,7 @@ class Tx_RssOutput_Domain_Repository_RecordRepository {
 		}
 		return $order;
 	}
+	
 	/**
 	 * Get the a page clause
 	 *
@@ -158,6 +158,7 @@ class Tx_RssOutput_Domain_Repository_RecordRepository {
 		$clause = ' AND (' . $_clause . ')'; #merge of the two clauses
 		return $clause;
 	}
+	
 	/**
 	 * Get the clause part of the query
 	 *
@@ -184,10 +185,11 @@ class Tx_RssOutput_Domain_Repository_RecordRepository {
 			$clause .= ' AND tx_rssoutput_includeinfeed = 1 ';
 		}
 
+		//TODO: disabled for now, because the value is a string 'fr' and we actually need an UID. Needs more debugging.
 		// Only return selected language content
-		if (!empty($configuration['sys_language_uid'])) {
-			$clause .= ' AND sys_language_uid=' . $configuration['sys_language_uid'];
-		}
+//		if (!empty($config['sys_language_uid'])) {
+//			$clause .= ' AND sys_language_uid=' . $config['sys_language_uid'];
+//		}
 
 		return $clause;
 	}
@@ -200,7 +202,7 @@ class Tx_RssOutput_Domain_Repository_RecordRepository {
 	 * @return	array		Array of all pid being children of <tt>$pid</tt>
 	 */
 	protected function getAllPages($pid, &$arrayOfPid = array()) {
-		$pages = tx_div::db()->exec_SELECTgetRows('uid', 'pages', 'deleted = 0 AND hidden = 0 AND pid = ' . $pid);
+		$pages = $this->db->exec_SELECTgetRows('uid', 'pages', 'deleted = 0 AND hidden = 0 AND pid = ' . $pid);
 		$arrayOfPid = array_merge($pages, $arrayOfPid);
 		if (count($pages) > 0) {
 			foreach ($pages as $page) {
